@@ -1,10 +1,10 @@
 class DishesController < APIBaseController
-  authorize_resource except: %i[index show]
+  # authorize_resource except: %i[index show]
 
-  before_action :auth_user, except: %i[index show]
+  # before_action :auth_user, except: %i[index show]
 
   def index
-    dishes = Dish.all.order(:zindex)
+    dishes = Dish.all
     if dishes.empty?
       render status: 204
     else
@@ -62,7 +62,7 @@ class DishesController < APIBaseController
   protected
 
   def default_dish_fields
-    %i[category_id name subname picurl price caption1 caption2 caption3 zindex]
+    %i[categories name description picture price]
   end
 
   def update_dish_params
