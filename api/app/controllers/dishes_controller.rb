@@ -40,7 +40,7 @@ class DishesController < APIBaseController
 
   def create
     @dish = Dish.new(create_dish_params)
-    @dish.categories = params[:dish]:categories]
+    @dish.categories = params[:dish][:categories]
     @dish.save
     if @dish.errors.blank?
       render json: @dish, status: :ok
