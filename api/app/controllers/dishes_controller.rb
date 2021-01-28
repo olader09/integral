@@ -39,7 +39,9 @@ class DishesController < APIBaseController
   end
 
   def create
-    @dish = Dish.create(create_dish_params)
+    @dish = Dish.new(create_dish_params)
+    @dish.categories = params[:categories]
+    @dish.save
     if @dish.errors.blank?
       render json: @dish, status: :ok
     else
@@ -62,7 +64,7 @@ class DishesController < APIBaseController
   protected
 
   def default_dish_fields
-    %i[categories name description picture price]
+    %i[name description picture price]
   end
 
   def update_dish_params
