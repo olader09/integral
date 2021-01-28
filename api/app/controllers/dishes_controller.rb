@@ -31,6 +31,8 @@ class DishesController < APIBaseController
       @redis.set('file_name', "picurl")
     end
     @dish.update(update_dish_params)
+    @dish.categories = params[:dish][:categories]
+    @dish.save
     if @dish.errors.blank?
       render json: @dish, status: :ok
     else
