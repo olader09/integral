@@ -28,7 +28,7 @@ class DishesController < APIBaseController
       @dish.save
       @redis.set('file_name', params[:file_name])
     else
-      @redis.set('file_name', "picurl")
+      @redis.set('file_name', "picture")
     end
     @dish.update(update_dish_params)
     @dish.categories = params[:dish][:categories]
