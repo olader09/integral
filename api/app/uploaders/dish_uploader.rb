@@ -41,10 +41,10 @@ class DishUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  def filename
-    @redis = Redis.new(host: 'redis', port: 6379, db: 15)
-    @redis.get('file_name') + '.jpg' if original_filename
-  end
+  # def filename
+  #   @redis = Redis.new(host: 'redis', port: 6379, db: 15)
+  #   @redis.get('file_name') + '.jpg' if original_filename
+  # end
 
 
 end
