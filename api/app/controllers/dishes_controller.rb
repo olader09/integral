@@ -62,7 +62,7 @@ class DishesController < APIBaseController
   protected
 
   def default_dish_fields
-    %i[categories name description picture price]
+    %i[categories name description picture price :categories]
   end
 
   def update_dish_params
