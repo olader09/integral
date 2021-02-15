@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     post :update_basket, on: :member
   end
 
+  resources :orders
+
   post :superuser_token, to: 'superuser_token#create'
   resource :superuser do
     get :show_user, on: :member
