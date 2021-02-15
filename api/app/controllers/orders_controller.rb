@@ -51,7 +51,7 @@ class OrdersController < APIBaseController
 
   def full_order_in_json
     @order.to_json( include: { 
-                      orders_dishes: { only: %i[quantity],
+                      order_dishes: { only: %i[quantity],
                         include:{
                           dish:{}
                         }},
