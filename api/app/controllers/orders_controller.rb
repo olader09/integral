@@ -32,7 +32,7 @@ class OrdersController < APIBaseController
         user_id: current_user.id
       )
       order_dishes.each do |order_dish|
-        @order.orders_dishes.new(dish: Dish.find(order_dish[:dish_id]), quantity: order_dish[:quantity}).save
+        @order.orders_dishes.new(dish: Dish.find(order_dish[:dish_id]), quantity: order_dish[:quantity]}).save
       end
       @order.save
       render json: full_order_in_json
