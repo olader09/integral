@@ -17,7 +17,7 @@ class User < ApplicationRecord
     password = new_password
     save
     # sms_service = SmsPasswordService.new(phone_number, new_password)
-    response = sms_service.send_request_sms_password
-    return response = JSON.parse(response.body)
+    # response = sms_service.send_request_sms_password
+    # return response = JSON.parse(response.body)
   end
 end
