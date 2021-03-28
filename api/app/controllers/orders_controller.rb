@@ -41,11 +41,11 @@ class OrdersController < APIBaseController
     end
   end
 
-  # def confirm
-  #   @order = Order.find(params[:id])
-  #   @order.update(confirmed: true)
-  #   render json: full_order_in_json
-  # end
+  def confirm
+    @order = Order.find(params[:id])
+    @order.update(confirmed: true)
+    render json: full_order_in_json
+  end
   
   private
 

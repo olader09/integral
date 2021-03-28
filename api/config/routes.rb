@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     post :update_basket, on: :member
   end
 
-  resources :orders
+  resources :orders do
+    put :confirm, on: :collection
+  end
 
   post :superuser_token, to: 'superuser_token#create'
   resource :superuser do
