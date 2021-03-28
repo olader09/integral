@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   resources :orders do
-    put :confirm, on: :collection
+    put :confirm, on: :member
   end
 
   post :superuser_token, to: 'superuser_token#create'
