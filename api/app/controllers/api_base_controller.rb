@@ -33,6 +33,6 @@ class APIBaseController < ActionController::API
   end
 
   def render_error_403
-    render json: {"error": "You are not authorized to access this page"}, status: 403
+    render json: {"error": "You haven't permissions to access this page"}, status: 403
   end
 end
