@@ -15,9 +15,9 @@ class OrdersController < APIBaseController
 
   def show
     unless current_superuser.present?
-      @order = current_user.orders.find_by(params[:id])
+      @order = current_user.orders.find_by(id: params[:id])
     else
-        @order = Order.find_by(params[:id])
+        @order = Order.find_by(id: params[:id])
     end
     render json: full_order_in_json
   end
