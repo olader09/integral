@@ -1,24 +1,13 @@
 class OrdersController < APIBaseController
-  before_action :auth_user
   load_and_authorize_resource
+  before_action :auth_user
 
   def index
-    # unless current_superuser.present?
-    #   orders = current_user.orders
-    #   return render status: 204 if orders.empty?
-    # else
-    #   orders = Order.all.order(id: :desc)
-    #   return render status: 204 if orders.empty?
-    # end
-    render json: @orders
+    return render status: 204 if @orders.empty?
+    render json: @orders.order(id: :desc)
   end
 
   def show
-    # unless current_superuser.present?
-    #   @order = Order.find(params[:id])
-    # else
-    #   @order = Order.find(params[:id])
-    # end
     render json: full_order_in_json
   end
   
@@ -42,12 +31,11 @@ class OrdersController < APIBaseController
   end
 
   def destroy
-    @order = Order.find(params[:id])
-    if @order.errors.blank?
+    if @order.confirmed?
+      render status: 403
+    else
       @order.destroy
       render status: :ok
-    else
-      render json: @order.errors.error, status: :bad_request
     end
   end
 

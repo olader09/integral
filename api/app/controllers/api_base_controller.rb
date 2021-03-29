@@ -26,8 +26,13 @@ class APIBaseController < ActionController::API
   end
 
   rescue_from ActiveRecord::RecordNotFound, with: :render_error_404
+  rescue_from CanCan::AccessDenied, with: :render_error_401
 
   def render_error_404
     render json: {"error": "Not found"}, status: :not_found
+  end
+
+  def render_error_403
+    render json: {"error": "You are not authorized to access this page"}, status: 403
   end
 end
