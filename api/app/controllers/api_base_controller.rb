@@ -24,4 +24,6 @@ class APIBaseController < ActionController::API
     @redis = Redis.new(host: 'redis', port: 6379, db: 15)
     @redis.set('temp_users_push_tokens', []) if @redis.get('temp_users_push_tokens').nil?
   end
+
+  rescue_from RecordNotFound, with: render json: {"error": "Not found"}, status: :not_found
 end
