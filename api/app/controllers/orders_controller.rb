@@ -47,7 +47,7 @@ class OrdersController < APIBaseController
       @order.destroy
       render status: :ok
     else
-      render json: @order.errors, status: :bad_request
+      render json: @order.errors.error, status: :bad_request
     end
   end
 
