@@ -8,7 +8,7 @@ class Ability
 
     if user&.class == User
       can :manage, User, id: user.id
-      can :manage, Order, user_id: user.id
+      can :crud, Order, user_id: user.id
       can :read, Dish
     elsif user&.class == Superuser
       can :manage, User
