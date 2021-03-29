@@ -1,24 +1,24 @@
 class OrdersController < APIBaseController
-  authorize_resource
+  load_and_authorize_resource
   before_action :auth_user
 
   def index
-    unless current_superuser.present?
-      orders = current_user.orders
-      return render status: 204 if orders.empty?
-    else
-      orders = Order.all.order(id: :desc)
-      return render status: 204 if orders.empty?
-    end
-    render json: orders
+    # unless current_superuser.present?
+    #   orders = current_user.orders
+    #   return render status: 204 if orders.empty?
+    # else
+    #   orders = Order.all.order(id: :desc)
+    #   return render status: 204 if orders.empty?
+    # end
+    render json: @orders
   end
 
   def show
-    unless current_superuser.present?
-      @order = Order.find(params[:id])
-    else
-      @order = Order.find(params[:id])
-    end
+    # unless current_superuser.present?
+    #   @order = Order.find(params[:id])
+    # else
+    #   @order = Order.find(params[:id])
+    # end
     render json: full_order_in_json
   end
   
