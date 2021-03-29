@@ -42,7 +42,7 @@ class OrdersController < APIBaseController
   end
 
   def destroy
-    @order = Dish.find_by(id: params[:id])
+    @order = Dish.find(params[:id])
     if @order.errors.blank?
       @order.destroy
       render status: :ok
