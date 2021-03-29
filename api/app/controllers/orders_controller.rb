@@ -41,6 +41,16 @@ class OrdersController < APIBaseController
     end
   end
 
+  def destroy
+    @order = Dish.find_by(id: params[:id])
+    if @order.errors.blank?
+      @order.destroy
+      render status: :ok
+    else
+      render json: @order.errors, status: :bad_request
+    end
+  end
+
   def confirm
     @order = Order.find(params[:id])
     @order.update(confirmed: true)

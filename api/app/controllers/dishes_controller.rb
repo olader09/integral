@@ -1,10 +1,14 @@
 class DishesController < APIBaseController
   # authorize_resource except: %i[index show]
 
-  # before_action :auth_user, except: %i[index show]
+  before_action :auth_user
 
   def index
-    dishes = Dish.all
+    if current_superuser.present?
+      dishes = Dish.all
+    else
+      dishes = Dish.where(visible: true)
+    end
     if dishes.empty?
       render status: 204
     else
