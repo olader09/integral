@@ -25,7 +25,7 @@ class APIBaseController < ActionController::API
     @redis.set('temp_users_push_tokens', []) if @redis.get('temp_users_push_tokens').nil?
   end
 
-  rescue_from RecordNotFound, with: render_error_404
+  rescue_from ActiveRecord::RecordNotFound, with: render_error_404
 
   def render_error_404
     render json: {"error": "Not found"}, status: :not_found
