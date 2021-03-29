@@ -7,9 +7,21 @@ class User < ApplicationRecord
 
   enumerize :role, in: %i[user], default: :user, predicates: true, scope: :shallow
 
+  def to_token_payload
+    {
+      sub: id,
+      class: self.class.to_s
+    }
+  end
+  
+
   def self.from_token_request(request)
     phone_number = request.params&.[]('auth')&.[]('phone_number')
     find_by phone_number: phone_number
+  end
+
+  def self.from_token_payload(payload)
+    find(payload['sub']) if payload['sub'] && payload['class'] && payload['class'] == to_s
   end
 
   def generate_password(phone_number)
