@@ -1,5 +1,5 @@
 class DishesController < APIBaseController
-  # authorize_resource except: %i[index show]
+  authorize_resource except: %i[index show]
 
   before_action :auth_user
 
