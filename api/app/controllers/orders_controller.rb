@@ -4,10 +4,10 @@ class OrdersController < APIBaseController
 
   def index
     unless current_superuser.present?
-      orders = current_user.orders
+      @orders = current_user.orders
       return render status: 204 if orders.empty?
     else
-      orders = Order.all.order(id: :desc)
+      @orders = Order.all.order(id: :desc)
       return render status: 204 if orders.empty?
     end
     render json: @orders
