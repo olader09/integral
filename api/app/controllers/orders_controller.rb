@@ -1,13 +1,20 @@
 class OrdersController < APIBaseController
-  load_and_authorize_resource
+  authorize_resource
   before_action :auth_user
 
   def index
-    return render status: 204 if @orders.empty?
-    render json: @orders.order(id: :desc)
+    unless current_superuser.present?
+      orders = current_user.orders
+      return render status: 204 if orders.empty?
+    else
+      orders = Order.all.order(id: :desc)
+      return render status: 204 if orders.empty?
+    end
+    render json: @orders
   end
 
   def show
+    @order = Order.find(params[:id])
     render json: full_order_in_json
   end
   
