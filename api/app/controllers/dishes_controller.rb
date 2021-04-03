@@ -59,7 +59,7 @@ class DishesController < APIBaseController
     @dish = Dish.find(params[:id])
     if @dish.errors.blank?
       @dish.delete
-      @dish.remove_picurl!
+      @dish.remove_picture!
       @dish.save
       render status: :ok
     else
