@@ -27,6 +27,13 @@ class DishesController < APIBaseController
 
   def update
     @dish = Dish.find(params[:id])
+    if params[:file_name].present?
+      @dish.remove_picture!
+      @dish.save
+      @redis.set('file_name', params[:file_name])
+    else
+      @redis.set('file_name', "picture")
+    end
     @dish.update(update_dish_params)
     @dish.categories = params[:dish][:categories]
     @dish.save
