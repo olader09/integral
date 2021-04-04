@@ -20,11 +20,11 @@ class OrdersController < APIBaseController
   
   def create
     order_dishes = params[:order_dishes]
-    total_price = params[:total_price]
+    total = params[:total]
 
     unless order_dishes.empty?
       @order = Order.new(
-        total: total_price,
+        total: total,
         user_id: current_user.id
       )
       order_dishes.each do |order_dish|
