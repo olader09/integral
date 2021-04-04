@@ -38,6 +38,7 @@ class OrdersController < APIBaseController
   end
 
   def destroy
+    @order = Order.find(params[:id])
     if @order.confirmed?
       render status: 403
     else
