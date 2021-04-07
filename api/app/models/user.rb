@@ -3,7 +3,7 @@ class User < ApplicationRecord
   
   validates :phone_number, presence: true, uniqueness: { case_sensitive: true }
   has_secure_password validations: false
-  has_many :orders
+  has_many :orders, dependent: :destroy
 
   enumerize :role, in: %i[user], default: :user, predicates: true, scope: :shallow
 
